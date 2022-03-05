@@ -14,6 +14,7 @@ int main()
 	if (img.empty())
 	{
 		puts("open file fail");
+		system("pause");
 		return -1;
 	}
 	Mat imgdst = img;
@@ -22,6 +23,7 @@ int main()
 	if (scanf_s("%d %d", &xx, &yy) != 2)
 	{
 		puts("read size fail");
+		system("pause");
 		return -2;
 	}
 	if (xx && yy)
@@ -48,5 +50,6 @@ int main()
 		fclose(f);
 	}
 	else puts("some error has happen,please try again minutes later");
+	system("pause");
 	return 0;
 }
