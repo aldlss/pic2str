@@ -6,7 +6,6 @@ using namespace cv;
 using namespace std;
 int main()
 {
-	//string file = "F:\\za\\left.jpg";
 	string file;
 	puts("please input file route");
 	cin >> file;
@@ -20,7 +19,7 @@ int main()
 	Mat imgdst = img;
 	int xx, yy;
 	puts("please input the pic size you want.(0 0 is the original size)");
-	if (scanf_s("%d %d", &xx, &yy) != 2)
+	if (scanf("%d %d", &xx, &yy) != 2)
 	{
 		puts("read size fail");
 		system("pause");
@@ -37,7 +36,7 @@ int main()
 	if (img.isContinuous())
 	{
 		FILE* f;
-		freopen_s(&f, file.c_str(), "w", stdout);
+		f=freopen(file.c_str(), "w", stdout);
 		int row = img.rows, col = img.cols, step = img.step,channel=img.channels();
 		int size = row * col;
 		ushort bitt;
@@ -45,8 +44,8 @@ int main()
 		{
 			for(int j = 0; j < col; ++j)
 			{
-			/*	Êµ¼ÊÉÏ£¬Á½¸öÍ¨µÀ£¬µÚÒ»¸öÍ¨µÀÊÇµÍ°ËÎ»£¬µÚ¶þ¸öÍ¨µÀÊÇ¸ß°ËÎ»£¬È»ºóÊÇ°´ÕÕRGB565À´ÅÅ²¼µÄ
-				ËùÒÔÉÏÃæÄÇÀï×ª»¯Ð´µÄ×ª»¯³ÉBGR565ÒÉËÆ´¿ÊôºöÓÆÁË	*/
+			/*	å®žé™…ä¸Šï¼Œä¸¤ä¸ªé€šé“ï¼Œç¬¬ä¸€ä¸ªé€šé“æ˜¯ä½Žå…«ä½ï¼Œç¬¬äºŒä¸ªé€šé“æ˜¯é«˜å…«ä½ï¼Œç„¶åŽæ˜¯æŒ‰ç…§RGB565æ¥æŽ’å¸ƒçš„
+				æ‰€ä»¥ä¸Šé¢é‚£é‡Œè½¬åŒ–å†™çš„è½¬åŒ–æˆBGR565ç–‘ä¼¼çº¯å±žå¿½æ‚ äº†	*/
 				bitt = ushort(img.data[i * step + j * channel]);
 				bitt |= ushort(img.data[i * step + j * channel + 1])<<8;
 
@@ -54,7 +53,7 @@ int main()
 			}
 			printf("\n");
 		}
-		freopen_s(&f, "CON", "w", stdout);
+		f=freopen("CON", "w", stdout);
 		puts("succeed");
 	}
 	else puts("some error has happen,please try again minutes later");
