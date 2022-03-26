@@ -1,7 +1,7 @@
 #ifndef _CrossPlatform
 #define _CrossPlatform
 
-    #ifdef WIN32
+    #ifdef _WIN32
         #define PAUSE system("pause");
     #endif //WIN32
     #ifdef linux
