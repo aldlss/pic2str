@@ -2,6 +2,7 @@
 #include<iostream>
 #include<fstream>
 #include<opencv2/opencv.hpp>
+#include"CrossPlatform.h"
 using namespace cv;
 using namespace std;
 int main()
@@ -13,7 +14,7 @@ int main()
 	if (img.empty())
 	{
 		puts("open file fail");
-		system("pause");
+		PAUSE
 		return -1;
 	}
 	Mat imgdst = img;
@@ -22,7 +23,7 @@ int main()
 	if (scanf("%d %d", &xx, &yy) != 2)
 	{
 		puts("read size fail");
-		system("pause");
+		PAUSE
 		return -2;
 	}
 	if (!xx)xx = img.rows;
@@ -36,7 +37,7 @@ int main()
 	if (img.isContinuous())
 	{
 		FILE* f;
-		f=freopen(file.c_str(), "w", stdout);
+		f=fopen(file.c_str(), "w");
 		int row = img.rows, col = img.cols, step = img.step,channel=img.channels();
 		int size = row * col;
 		ushort bitt;
@@ -49,14 +50,14 @@ int main()
 				bitt = ushort(img.data[i * step + j * channel]);
 				bitt |= ushort(img.data[i * step + j * channel + 1])<<8;
 
-				printf("0x%04x, ", bitt);
+				fprintf(f,"0x%04x, ", bitt);
 			}
-			printf("\n");
+			fprintf(f,"\n");
 		}
-		f=freopen("CON", "w", stdout);
+		fclose(f);
 		puts("succeed");
 	}
 	else puts("some error has happen,please try again minutes later");
-	system("pause");
+	PAUSE
 	return 0;
 }
